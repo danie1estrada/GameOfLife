@@ -1,9 +1,8 @@
 #include "EventHandler.h"
-#include <thread>
 
 int main(int argc, char *argv[]) {
 	
-	GameOfLife game(100, 190, 5);
+	GameOfLife game(100, 200, 5);
 	EventHandler handler(&game);
 	SDL_Event event;
 

@@ -13,7 +13,6 @@ public:
 private:
 	SDL_Renderer *renderer;
 	SDL_Window *window;
-	SDL_Event event;
 	SDL_Rect rect;
 
 public:

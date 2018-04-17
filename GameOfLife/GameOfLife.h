@@ -17,24 +17,24 @@ private:
 	unsigned int bg_r, bg_g, bg_b;
 
 public:
-	GameOfLife(int, int, int);
+	GameOfLife(int n_rows, int n_columns, int scale);
 	~GameOfLife();
 	void Play();
 	void Exit();
 	bool IsRunning();
 	bool IsPaused();
-	void ChangeState(int, int, bool);
+	void ChangeState(int x, int y, bool value);
 	void IncreaseSpeed();
 	void DecreaseSpeed();
 	void PlayPause();
 	void Reset();
-	void SetColor(int, int, int);
-	void SetBackgroundColor(int, int, int);
+	void SetColor(int r, int g, int b);
+	void SetBackgroundColor(int r, int g, int b);
 	void Reload();
 
 private:
 	void Initialize();
 	void CopyGrid();
-	int NeighborsAlive(int, int);
+	int NeighborsAlive(int curr_i, int curr_j);
 };
 
