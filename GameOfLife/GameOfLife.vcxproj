@@ -125,13 +125,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game_of_life.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="GameOfLife.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game_of_life.h" />
+    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="GameOfLife.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

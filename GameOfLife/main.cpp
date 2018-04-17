@@ -1,65 +1,50 @@
-#include "game_of_life.h"
-#include <SDL.h>
+/**
+ * @file main.cpp
+ * @version 2.0
+ * @author Daniel Estrada
+ * @title Main
+ * @
+ */
+#include "EventHandler.h"
+#include <thread>
 
-void ActionPerformed(SDL_Event);
-void MouseClick(SDL_Event);
-void KeyPressed(int);
+void Something(GameOfLife *game);
 
-GameOfLife game(100, 185, 5);
-SDL_Event event;
-
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[]) {
 	
+	GameOfLife game(100, 190, 5);
+	EventHandler handler(&game);
+	SDL_Event event;
+
+	std::thread t(Something, &game);
+
 	while (game.IsRunning()) {
 		if (SDL_PollEvent(&event)) {
-			ActionPerformed(event);
+			handler.ActionPerformed(event);
 		}
-		game.Play();
+		if (!game.IsPaused()) {
+			game.Play();
+		}
 	}
 
 	return 0;
 }
 
-void ActionPerformed(SDL_Event event) {
-	switch (event.type) {
-		case SDL_QUIT:
-			game.Exit();
-			break;
-		case SDL_KEYDOWN:
-			KeyPressed(event.key.keysym.sym);
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			MouseClick(event);
-			break;
-		case SDL_MOUSEMOTION:
-			break;
-	}
-}
+void Something(GameOfLife *game) {
+	int answer, r, g, b;
 
-void KeyPressed(int key) {
-	switch (key) {
-		case SDLK_s:
-			break;
-		case SDLK_c:
-			break;
-		case SDLK_PLUS:
-			break;
-		case SDLK_MINUS:
-			break;
-		case SDLK_KP_PLUS:
-			break;
-		case SDLK_KP_MINUS:
-			break;
-	}
-}
+	while (true) {
+		std::cout << "Elija\n0. Color\n1. Fondo\nRespuesta: ";
+		std::cin >> answer;
+		std::cout << "Ingrese los valores: ";
 
-void MouseClick(SDL_Event event) {
-	int x = event.motion.x;
-	int y = event.motion.y;
-	if (event.button.button == SDL_BUTTON_LEFT) {
-		game.ChangeState(x, y, true);
-	}
-	if (event.button.button == SDL_BUTTON_RIGHT) {
-		game.ChangeState(x, y, false);
+		if (answer == 0) {
+			std::cin >> r >> g >> b;
+			game->SetColor(r, g, b);
+		} else if (answer == 1) {
+			std::cin >> r >> g >> b;
+			game->SetBackgroundColor(r, g, b);
+		}
+		std::cout << std::endl;
 	}
 }

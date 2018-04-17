@@ -1,12 +1,8 @@
 #include "Window.h"
 
-Window::Window(const char * title, int width, int height, int scale) :
+Window::Window(const char *title, int width, int height, int scale) :
 	TITLE(title), WIDTH(width), HEIGHT(height), SCALE(scale) {
 	Initialize();
-	std::cout << "Window: " << std::endl;
-	std::cout << "\tWidth: " << WIDTH << std::endl;
-	std::cout << "\tHeight: " << HEIGHT << std::endl;
-	std::cout << "\tScale: " << SCALE << std::endl;
 }
 
 Window::~Window() {
@@ -30,7 +26,9 @@ void Window::Initialize() {
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	rect.w = SCALE;
 	rect.h = SCALE;
-	Clear();
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 }
 
 void Window::DrawRect(int x, int y, int r, int g, int b) {
@@ -44,8 +42,8 @@ void Window::Present() {
 	SDL_RenderPresent(renderer);
 }
 
-void Window::Clear() {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+void Window::Clear(int r, int g, int b) {
+	SDL_SetRenderDrawColor(renderer, r, g, b, 255);
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
 }
