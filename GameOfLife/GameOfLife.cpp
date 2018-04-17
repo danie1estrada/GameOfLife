@@ -20,7 +20,7 @@ void GameOfLife::Initialize() {
 	speed = 40;
 	running = true;
 	playing = false;
-	r = 0, g = 255, b = 125;
+	r = 0, g = 255, b = 100;
 	bg_r = 0, bg_g = 0, bg_b = 0;
 
 	grid = new bool *[ROWS];
@@ -161,14 +161,14 @@ void GameOfLife::PlayPause() {
 	playing = !playing;
 }
 
-void GameOfLife::Exit() {
-	running = false;
-}
-
 bool GameOfLife::IsRunning() {
 	return running;
 }
 
 bool GameOfLife::IsPaused() {
 	return !playing;
+}
+
+void GameOfLife::Exit() {
+	running = false;
 }
