@@ -56,10 +56,8 @@ int GameOfLife::NeighborsAlive(int curr_i, int curr_j) {
 			}
 		}
 	}
-	if (aux_grid[curr_i][curr_j]) {
-		neighbors--;
-	}
-	return neighbors;
+
+	return neighbors - aux_grid[curr_i][curr_j];
 }
 
 void GameOfLife::CopyGrid() {
@@ -76,7 +74,7 @@ void GameOfLife::Play() {
 	for (int i = 0; i < ROWS; i++) {
 		for (int j = 0; j < COLUMNS; j++) {
 			n_alive = NeighborsAlive(i, j);
-			if (aux_grid[i][j] == 1 && (n_alive > 3 || n_alive < 2)) {
+			if (aux_grid[i][j] == 1 && (n_alive < 2 || n_alive > 3)) {
 				grid[i][j] = 0;
 				window.DrawRect(j, i, bg_r, bg_g, bg_b);
 			}
@@ -93,8 +91,7 @@ void GameOfLife::Play() {
 void GameOfLife::ChangeState(int x, int y, bool value) {
 	int i = y / window.SCALE;
 	int j = x / window.SCALE;
-	grid[i][j] = value;
-	aux_grid[i][j] = value;
+	grid[i][j] = aux_grid[i][j] = value;
 
 	if (value) {
 		window.DrawRect(j, i, r, g, b);
