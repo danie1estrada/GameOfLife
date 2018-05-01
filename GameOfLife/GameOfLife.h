@@ -28,9 +28,6 @@ public:
 	void DecreaseSpeed();
 	void PlayPause();
 	void Reset();
-	void SetColor(int r, int g, int b);
-	void SetBackgroundColor(int r, int g, int b);
-	void Reload();
 
 private:
 	void Initialize();

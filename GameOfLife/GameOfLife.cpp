@@ -112,18 +112,6 @@ void GameOfLife::Reset() {
 	playing = false;
 }
 
-void GameOfLife::Reload() {
-	window.Clear(bg_r, bg_g, bg_b);
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLUMNS; j++) {
-			if (grid[i][j]) {
-				window.DrawRect(j, i, r, g, b);
-			}
-		}
-	}
-	window.Present();
-}
-
 void GameOfLife::IncreaseSpeed() {
 	if (speed > 10) {
 		speed -= 10;
@@ -138,20 +126,6 @@ void GameOfLife::DecreaseSpeed() {
 	} else if (speed < 10) {
 		speed++;
 	}
-}
-
-void GameOfLife::SetColor(int r, int g, int b) {
-	this->r = r;
-	this->g = g;
-	this->b = b;
-	Reload();
-}
-
-void GameOfLife::SetBackgroundColor(int r, int g, int b) {
-	bg_r = r;
-	bg_g = g;
-	bg_b = b;
-	Reload();
 }
 
 void GameOfLife::PlayPause() {
